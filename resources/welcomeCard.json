@@ -1,0 +1,71 @@
+{
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "type": "AdaptiveCard",
+  "version": "1.0",
+  "body": [
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "width": 2,
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "Benvenuto su Doc-Help!",
+              "weight": "bolder",
+              "size": "extraLarge",
+              "spacing": "none"
+            },
+            {
+              "type": "TextBlock",
+              "text": "Il bot che aiuta a gestire le tua salute :)",
+              "isSubtle": true,
+              "spacing": "none"
+            },
+            {
+              "type": "TextBlock",
+              "text": "Registrati o effettua il login per memorizzare e gestire le tue informazioni oppure usa le funzionalità di ricerca per trovare il medico adatto a te.\"",
+              "size": "medium",
+              "wrap": true
+            },
+            {
+              "type": "TextBlock",
+              "text": "Accedi o Registrati, fai domande su malattie medici e segna le tue visite tutto via chat.\"",
+              "size": "medium",
+              "wrap": true
+            }
+          ]
+        },
+        {
+          "type": "Column",
+          "width": 1,
+          "items": [
+            {
+              "type": "Image",
+              "url": "https://raw.githubusercontent.com/frapiocov/frapiocov.github.io/main/img/donothing/dono%20(11).webp",
+              "size": "auto"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.OpenUrl",
+      "title": "Registrati",
+      "url": "https://www.frapiocov.github.io"
+    },
+    {
+      "type": "Action.Submit",
+      "title": "Accedi",
+      "data": {
+        "msteams": {
+            "type": "signin",
+            "value": "https://signin.com"
+        }
+      }
+    }
+  ]
+}
