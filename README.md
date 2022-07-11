@@ -1,12 +1,16 @@
 # DocHelpBot
-
-bot for Cloud course project
-
+---
+Bot for Cloud course project :(
+--
 This bot has been created using [Bot Framework](https://dev.botframework.com), it shows how to:
 
 - Use [LUIS](https://www.luis.ai) to implement core AI capabilities
 - Implement a multi-turn conversation using Dialogs
 - Handle user interruptions for such things as `Help` or `Cancel`
+- Use BingSearch for searching information about doctors, diseases or symptoms of a disease.
+- Use AzureMaps for searching the doctors nearby.
+- Use BotApp for manage and deploy the bot.
+- Use CosmosDB to store user information.
 - Prompt for and validate requests for information from the user
 
 ## Prerequisites
@@ -26,7 +30,7 @@ This bot uses [LUIS](https://www.luis.ai), an AI based cognitive service, to imp
 
 ### Create a LUIS Application to enable language understanding
 
-The LUIS model for this example can be found under `cognitiveModels/FlightBooking.json` and the LUIS language model setup, training, and application configuration steps can be found [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-howto-v4-luis?view=azure-bot-service-4.0&tabs=javascript).
+The LUIS model for this example can be found under `cognitiveModels/docHelp-LUIS.json` and the LUIS language model setup, training, and application configuration steps can be found [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-howto-v4-luis?view=azure-bot-service-4.0&tabs=javascript).
 
 Once you created the LUIS model, update `.env` with your `LuisAppId`, `LuisAPIKey` and `LuisAPIHostName`.
 

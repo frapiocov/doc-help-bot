@@ -1,5 +1,6 @@
 const { CardFactory } = require('botbuilder-core');
 const { DialogBot } = require('./dialogBot');
+/* json welcome card */
 const WelcomeCard = require('../resources/welcomeCard.json');
 
 // sub-bot of the dialog bot

@@ -1,7 +1,12 @@
 const { TimexProperty } = require('@microsoft/recognizers-text-data-types-timex-expression');
 const { MessageFactory, InputHints } = require('botbuilder');
 const { LuisRecognizer } = require('botbuilder-ai');
+const { CardFactory } = require('botbuilder-core')
 const { ComponentDialog, DialogSet, DialogTurnStatus, TextPrompt, WaterfallDialog } = require('botbuilder-dialogs');
+
+/* Cards to display */
+const LoginCard = require("../resources/loginCard.json")
+const SignUpCard = require("../resources/signupCard.json")
 
 const MAIN_WATERFALL_DIALOG = 'mainWaterfallDialog';
 
@@ -9,10 +14,10 @@ class MainDialog extends ComponentDialog {
     constructor(luisRecognizer, bookingDialog) {
         super('MainDialog');
 
-        if (!luisRecognizer) throw new Error('[MainDialog]: Missing parameter \'luisRecognizer\' is required');
+        if (!luisRecognizer) throw new Error('[MainDialog]: Parametro mancante, richiesto \'luisRecognizer\'');
         this.luisRecognizer = luisRecognizer;
 
-        if (!bookingDialog) throw new Error('[MainDialog]: Missing parameter \'bookingDialog\' is required');
+        if (!bookingDialog) throw new Error('[MainDialog]: Parametro mancante, richiesto \'bookingDialog\'');
 
         // define the main dialog and its related components.
         // this is a sample "book a flight" dialog.
@@ -28,7 +33,8 @@ class MainDialog extends ComponentDialog {
     }
 
     /**
-     * the run method handles the incoming activity (in the form of a TurnContext) and passes it through the dialog system.
+     * the run method handles the incoming activity (in the form of a TurnContext) 
+     * and passes it through the dialog system.
      * if no dialog is active, it will start the default dialog.
      */
     async run(turnContext, accessor) {
@@ -49,7 +55,7 @@ class MainDialog extends ComponentDialog {
      */
     async introStep(stepContext) {
         if (!this.luisRecognizer.isConfigured) {
-            const messageText = 'NOTE: LUIS non è configurato. Controlla la configurazione LUIS nel .env file.';
+            const messageText = 'NOTA: LUIS non è configurato. Controlla la configurazione LUIS nel .env file.';
             await stepContext.context.sendActivity(messageText, null, InputHints.IgnoringInput);
             return await stepContext.next();
         }
@@ -73,6 +79,7 @@ class MainDialog extends ComponentDialog {
 
         // Call LUIS and gather any potential booking details. (Note the TurnContext has the response to the prompt)
         const luisResult = await this.luisRecognizer.executeLuisQuery(stepContext.context);
+        /* Use the top intent to choose the action */
         switch (LuisRecognizer.topIntent(luisResult)) {
         case 'BookFlight': {
             // Extract the values for the composite entities from the LUIS result.
@@ -92,15 +99,9 @@ class MainDialog extends ComponentDialog {
             return await stepContext.beginDialog('bookingDialog', bookingDetails);
         }
 
-        case 'GetWeather': {
-            // We haven't implemented the GetWeatherDialog so we just display a TODO message.
-            const getWeatherMessageText = 'TODO: get weather flow here';
-            await stepContext.context.sendActivity(getWeatherMessageText, getWeatherMessageText, InputHints.IgnoringInput);
-            break;
-        }
-
         case 'DocHelp_Login': {
-            await stepContext.context.sendActivity("bravo cretino accedi!");
+            const loginCard = CardFactory.adaptiveCard(LoginCard);
+            await stepContext.context.sendActivity({ attachments: [loginCard] });
             break;
         }
 
@@ -120,7 +121,8 @@ class MainDialog extends ComponentDialog {
         }
 
         case 'DocHelp_SignUp': {
-            await stepContext.context.sendActivity("tiè registrati muoviti");
+            const signupCard = CardFactory.adaptiveCard(SignUpCard);
+            await stepContext.context.sendActivity({ attachments: [signupCard] });
             break;
         }
 
@@ -155,7 +157,7 @@ class MainDialog extends ComponentDialog {
         }
 
         case 'Utilities_Repeat': {
-            await stepContext.context.sendActivity("aripeti operazione");
+            await stepContext.context.sendActivity("ripeti operazione");
             break;
         }
 
@@ -185,14 +187,14 @@ class MainDialog extends ComponentDialog {
         }
 
         case 'Utilities_StartOver': {
-            await stepContext.context.sendActivity("ricomincia bog");
+            await stepContext.context.sendActivity("ricomincia bot");
             break;
         }
         
 
         default: {
             // Catch all for unhandled intents
-            const didntUnderstandMessageText = `Sorry, I didn't get that. Please try asking in a different way (intent was ${ LuisRecognizer.topIntent(luisResult) })`;
+            const didntUnderstandMessageText = `Richiesta non riconosciuta. Prova a richiedere in un altro modo (intent riconosciuto: ${ LuisRecognizer.topIntent(luisResult) })`;
             await stepContext.context.sendActivity(didntUnderstandMessageText, didntUnderstandMessageText, InputHints.IgnoringInput);
         }
         }
@@ -241,7 +243,7 @@ class MainDialog extends ComponentDialog {
         }
 
         // Restart the main dialog with a different message the second time around
-        return await stepContext.replaceDialog(this.initialDialogId, { restartMsg: 'What else can I do for you?' });
+        return await stepContext.replaceDialog(this.initialDialogId, { restartMsg: 'Cosa altro posso fare per te \U0001F929 ?' });
     }
 }
 

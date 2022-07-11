@@ -19,19 +19,13 @@
             },
             {
               "type": "TextBlock",
-              "text": "Il bot che aiuta a gestire le tua salute :)",
+              "text": "Il bot che aiuta a gestire le tua salute",
               "isSubtle": true,
               "spacing": "none"
             },
             {
               "type": "TextBlock",
-              "text": "Registrati o effettua il login per memorizzare e gestire le tue informazioni oppure usa le funzionalità di ricerca per trovare il medico adatto a te.\"",
-              "size": "medium",
-              "wrap": true
-            },
-            {
-              "type": "TextBlock",
-              "text": "Accedi o Registrati, fai domande su malattie medici e segna le tue visite tutto via chat.\"",
+              "text": "Registrati o effettua il login per memorizzare e gestire le tue informazioni oppure usa le funzionalità di ricerca per trovare il medico adatto a te.",
               "size": "medium",
               "wrap": true
             }
@@ -49,23 +43,6 @@
           ]
         }
       ]
-    }
-  ],
-  "actions": [
-    {
-      "type": "Action.OpenUrl",
-      "title": "Registrati",
-      "url": "https://www.frapiocov.github.io"
-    },
-    {
-      "type": "Action.Submit",
-      "title": "Accedi",
-      "data": {
-        "msteams": {
-            "type": "signin",
-            "value": "https://signin.com"
-        }
-      }
     }
   ]
 }

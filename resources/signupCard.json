@@ -12,33 +12,47 @@
             "items": [
               {
                 "type": "TextBlock",
-                "text": "Login Account",
+                "text": "Registrazione",
                 "weight": "bolder",
                 "size": "medium"
               },
               {
                 "type": "TextBlock",
-                "text": "Accedi al tuo account inserendo le credenziali.",
+                "text": "Crea un nuovo account per avere tutto a portata di mano.",
                 "isSubtle": true,
                 "wrap": true
+              },
+              {
+                "type": "TextBlock",
+                "text": "Non preoccuparti, i tuoi dati saranno cifrati e in alcun modo condivisi.",
+                "isSubtle": true,
+                "wrap": true,
+                "size": "small"
               },
               {
                 "type": "Container",
                 "items": [
                   {
                     "type": "Input.Text",
-                    "label": "E-mail",
-                    "id": "email",
-                    "regex": "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\/.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\/.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?",
-                    "errorMessage": "L'email non rispetta il formato.",
+                    "label": "Nome e Cognome",
+                    "id": "name",
+                    "regex": "",
+                    "errorMessage": "Il nome non rispetta il formato.",
+                    "isRequired": true
+                  },
+                  {
+                    "type": "Input.Date",
+                    "label": "Data di nascita",
+                    "id": "ddn",
+                    "errorMessage": "La data di nascita non rispetta il formato.",
                     "isRequired": true
                   },
                   {
                     "type": "Input.Text",
-                    "label": "Password",
-                    "id": "password",
-                    "regex": "^(?=.*[A-Za-z])(?=.*\/d)[A-Za-z\/d]{8,}$",
-                    "errorMessage": "La password non rispetta il formato.",
+                    "label": "Luogo di nascita",
+                    "id": "luogo",
+                    "regex": "",
+                    "errorMessage": "Il nome non rispetta il formato.",
                     "isRequired": true
                   }
                 ]
@@ -63,7 +77,7 @@
     "actions": [
       {
         "type": "Action.Submit",
-        "title": "Login"
+        "title": "Submit"
       }
     ]
   }
